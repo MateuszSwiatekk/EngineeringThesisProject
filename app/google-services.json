@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "554978898612",
+    "project_id": "engdb-22e9f",
+    "storage_bucket": "engdb-22e9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554978898612:android:9f3c1b5aa8e330184b5de1",
+        "android_client_info": {
+          "package_name": "pl.swiatek.restaurantclientapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554978898612-0p1p9hk1hne6b720f5a6pfahg9dvu58q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTEhDvT9Im-3T31i7M6fTRt3UHNAevgcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554978898612-0p1p9hk1hne6b720f5a6pfahg9dvu58q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
