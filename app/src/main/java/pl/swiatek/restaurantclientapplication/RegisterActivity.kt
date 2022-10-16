@@ -8,13 +8,10 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class RegisterActivity : AppCompatActivity() {
-
-    private var mAuth: FirebaseAuth? = null
 
     private lateinit var editTextEmail:EditText
     private lateinit var editTextName:EditText
@@ -24,7 +21,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        mAuth = FirebaseAuth.getInstance()
 
         editTextEmail=findViewById(R.id.registerEmailEdit)
         editTextName=findViewById(R.id.registerNameEdit)
