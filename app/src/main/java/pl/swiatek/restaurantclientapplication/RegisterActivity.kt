@@ -1,19 +1,25 @@
 package pl.swiatek.restaurantclientapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-
-private var mAuth: FirebaseAuth? = null
+import com.google.firebase.auth.FirebaseUser
 
 class RegisterActivity : AppCompatActivity() {
+
+    private var mAuth: FirebaseAuth? = null
 
     private lateinit var editTextEmail:EditText
     private lateinit var editTextName:EditText
     private lateinit var editTextPassword:EditText
+    private lateinit var progressBar:ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +29,7 @@ class RegisterActivity : AppCompatActivity() {
         editTextEmail=findViewById(R.id.registerEmailEdit)
         editTextName=findViewById(R.id.registerNameEdit)
         editTextPassword=findViewById(R.id.registerPasswordEdit)
-
+        progressBar=findViewById(R.id.progressBar2)
     }
 
     fun registerClicked(view: View){
@@ -57,6 +63,20 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
+        progressBar.visibility=View.VISIBLE
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                val firebaseUser:FirebaseUser=task.result!!.user!!
+                Toast.makeText(applicationContext,"Registration complete!",Toast.LENGTH_SHORT).show()
+                val intent= Intent(this,LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(applicationContext,"Something went wrong!",Toast.LENGTH_SHORT).show()
+                progressBar.visibility=View.INVISIBLE
+            }
+        }
     }
 
 }
