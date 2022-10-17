@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantClientApplication">
         <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainUserPanel"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

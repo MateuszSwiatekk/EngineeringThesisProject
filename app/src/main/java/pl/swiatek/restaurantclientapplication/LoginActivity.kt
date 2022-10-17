@@ -57,8 +57,19 @@ class LoginActivity : AppCompatActivity() {
         progressBar.visibility=View.VISIBLE
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password).addOnCompleteListener{task->
             if(task.isSuccessful){
-                Toast.makeText(applicationContext,"Logged in",Toast.LENGTH_SHORT).show()
-                progressBar.visibility=View.INVISIBLE
+                val firebaseUser=FirebaseAuth.getInstance().currentUser
+
+                if(firebaseUser!!.isEmailVerified){
+                    Toast.makeText(applicationContext,"Logged in",Toast.LENGTH_SHORT).show()
+                    progressBar.visibility=View.INVISIBLE
+                    val intent=Intent(this,MainUserPanel::class.java)
+                    startActivity(intent)
+                    finish()
+                }else{
+                    firebaseUser.sendEmailVerification()
+                    Toast.makeText(applicationContext,"Verify your email!",Toast.LENGTH_SHORT).show()
+                    progressBar.visibility=View.INVISIBLE
+                }
             }else{
                 Toast.makeText(applicationContext,"Something went wrong!", Toast.LENGTH_SHORT).show()
                 progressBar.visibility=View.INVISIBLE
@@ -66,6 +77,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    fun resetPasswordClick(view: View){
+        val intent=Intent(this,ResetPasswordActivity::class.java)
+        startActivity(intent)
     }
 
 }

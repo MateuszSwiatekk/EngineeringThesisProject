@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -63,7 +64,10 @@ class RegisterActivity : AppCompatActivity() {
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password).addOnCompleteListener { task ->
             if(task.isSuccessful){
-                val firebaseUser:FirebaseUser=task.result!!.user!!
+                val user= User(name,email)
+                FirebaseDatabase.getInstance().getReference("Users")
+                    .child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    .setValue(user)
                 Toast.makeText(applicationContext,"Registration complete!",Toast.LENGTH_SHORT).show()
                 val intent= Intent(this,LoginActivity::class.java)
                 startActivity(intent)
