@@ -13,7 +13,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 class MainUserPanel : AppCompatActivity() {
 
@@ -49,6 +48,11 @@ class MainUserPanel : AppCompatActivity() {
         makeText(applicationContext,"Logged out!",Toast.LENGTH_SHORT).show()
         startActivity(intent)
         finish()
+    }
+
+    fun bookingClick(view: View){
+        val intent=Intent(this,ChooseDateActivity::class.java)
+        startActivity(intent)
     }
 
 }
