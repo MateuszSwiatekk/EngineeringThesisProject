@@ -48,7 +48,7 @@ class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListene
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        savedDay=day
+        savedDay=dayOfMonth
         savedMonth=month+1
         savedYear=year
 
