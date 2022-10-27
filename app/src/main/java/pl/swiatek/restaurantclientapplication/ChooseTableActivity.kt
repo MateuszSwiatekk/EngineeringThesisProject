@@ -6,22 +6,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import java.util.*
-import javax.xml.validation.Validator
+import kotlin.properties.Delegates
 
 class ChooseTableActivity : AppCompatActivity() {
     private lateinit var email:String
-    private lateinit var db:DatabaseReference
     private lateinit var userId:String
     private lateinit var data2:String
     private lateinit var data3:String
     private lateinit var bookedTablesData:DatabaseReference
     private lateinit var bookedTables:MutableSet<String>
+    private var bookedAmount by Delegates.notNull<Long>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +42,20 @@ class ChooseTableActivity : AppCompatActivity() {
         data2 = (data!![0]).toString()+(data[1]).toString()+(data[2]).toString()+(data[3]).toString()+(data[4]).toString()
         data3 = (data[0]).toString()+(data[1]).toString()+(data[2]).toString()+(data[3].toInt()+1).toString()+(data[4].toInt()).toString()
 
-        db=FirebaseDatabase.getInstance().getReference("BookedTables")
+        userId= FirebaseAuth.getInstance().currentUser!!.uid
+        email= FirebaseAuth.getInstance().currentUser!!.email.toString()
         bookedTablesData=FirebaseDatabase.getInstance().getReference("BookedTables")
         bookedTables= mutableSetOf()
 
-        val query = bookedTablesData.orderByChild("endDate").startAt(data2).endAt(data3)
-        query.addValueEventListener(object:ValueEventListener{
+        val queryGetBookedTables = bookedTablesData.orderByChild("endDate").startAt(data2).endAt(data3)
+        queryGetBookedTables.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.hasChildren()){
                     for(snapData in snapshot.children){
                         val tableData=snapData.getValue(BookedTable::class.java)
                         bookedTables.add(tableData!!.tableNumber)
                     }
-                    for(i in 0..10){
+                    for(i in 0..9){
                         if (bookedTables.contains((i+1).toString())) {
                             arrayTableBtns[i].setBackgroundColor(Color.GRAY)
                             arrayTableBtns[i].isClickable = false
@@ -71,71 +70,110 @@ class ChooseTableActivity : AppCompatActivity() {
 
         })
 
-        userId= FirebaseAuth.getInstance().currentUser!!.uid
-        val databaseUsers=FirebaseDatabase.getInstance().getReference("Users")
-
-        databaseUsers.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val user: User? = dataSnapshot.getValue(User::class.java)
-                email = user!!.email
-                Toast.makeText(applicationContext, email, Toast.LENGTH_SHORT).show()
+        val queryAmountBooked = bookedTablesData.orderByChild("email").equalTo(email)
+        queryAmountBooked.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.hasChildren()){
+                    bookedAmount=snapshot.childrenCount
+                }else{
+                    bookedAmount=0
+                }
             }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.d("ERR","Couldn't get email")
+            override fun onCancelled(error: DatabaseError) {
+
             }
 
         })
     }
 
+    fun bookTable(tableNum:String){
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Do you really want to book this table?")
+        builder.setTitle("Confirmation")
+        builder.setCancelable(false)
+
+        builder.setPositiveButton("Yes") {
+                dialog, which -> val booking=BookedTable(tableNum,data2,data3,email)
+            bookedTablesData.child(bookedTablesData.push().key!!)
+                .setValue(booking)
+        }
+
+        builder.setNegativeButton("No") {
+                dialog, which -> dialog.cancel()
+        }
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
     fun table1Click(view: View){
-        val booking=BookedTable("1",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("1")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table2Click(view: View){
-        val booking=BookedTable("2",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("2")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table3Click(view: View){
-        val booking=BookedTable("3",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("3")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table4Click(view: View){
-        val booking=BookedTable("4",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("4")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table5Click(view: View){
-        val booking=BookedTable("5",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("5")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table6Click(view: View){
-        val booking=BookedTable("6",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("6")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table7Click(view: View){
-        val booking=BookedTable("7",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("7")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table8Click(view: View){
-        val booking=BookedTable("8",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("8")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table9Click(view: View){
-        val booking=BookedTable("9",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("9")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
     fun table10Click(view: View){
-        val booking=BookedTable("10",data2,data3,email)
-        db.child(db.push().key!!)
-            .setValue(booking)
+        if(bookedAmount<3) {
+            bookTable("10")
+        }else{
+            Toast.makeText(applicationContext, "Can't make more reservations!", Toast.LENGTH_SHORT).show()
+        }
     }
 }

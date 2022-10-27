@@ -5,12 +5,15 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.CalendarContract
 import android.view.View
 import android.widget.DatePicker
+import android.widget.TextView
 import android.widget.TimePicker
 import android.widget.Toast
-import java.time.LocalDate
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.LocalDateTime.*
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -27,10 +30,16 @@ class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListene
     var savedHour =0;
     var savedMinute=0;
 
+    private lateinit var dateText:TextView
+    private lateinit var currentDate:LocalDateTime
+    private lateinit var datePicked:LocalDateTime
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_date)
+        dateText=findViewById(R.id.dateText)
+        currentDate = now()
+
     }
 
     private fun getDateTime(){
@@ -38,7 +47,7 @@ class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListene
         day=cal.get(Calendar.DAY_OF_MONTH)
         month=cal.get(Calendar.MONTH)
         year=cal.get(Calendar.YEAR)
-        hour=cal.get(Calendar.HOUR)
+        hour=cal.get(Calendar.HOUR_OF_DAY)
         minute=cal.get(Calendar.MINUTE)
     }
 
@@ -59,8 +68,8 @@ class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListene
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         savedHour=hourOfDay
         savedMinute=minute
-
-        Toast.makeText(applicationContext,"$savedDay-$savedMonth-$savedYear-$savedHour-$savedMinute",Toast.LENGTH_SHORT).show()
+        dateText.text="$savedDay-$savedMonth-$savedYear, $savedHour:$savedMinute"
+        datePicked=of(savedYear,savedMonth,savedDay,savedHour,savedMinute)
     }
 
     fun onBookTableClick(view: View){
@@ -68,6 +77,12 @@ class ChooseDateActivity : AppCompatActivity(),DatePickerDialog.OnDateSetListene
             Toast.makeText(applicationContext,"Pick date!",Toast.LENGTH_SHORT).show()
             return
         }
+
+            if(datePicked.isBefore(currentDate)){
+                Toast.makeText(applicationContext,"Invalid date!",Toast.LENGTH_SHORT).show()
+                return
+            }
+
             val intent = Intent(this, ChooseTableActivity::class.java)
             intent.putExtra(
                 "selectedDate",
