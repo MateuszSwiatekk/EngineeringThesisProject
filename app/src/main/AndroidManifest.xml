@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantClientApplication">
         <activity
+            android:name=".ViewReservationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChooseTableActivity"
             android:exported="false" />
         <activity

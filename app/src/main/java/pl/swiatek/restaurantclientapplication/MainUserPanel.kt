@@ -55,4 +55,9 @@ class MainUserPanel : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun viewReservationsClick(view: View){
+        val intent=Intent(this,ViewReservationsActivity::class.java)
+        startActivity(intent)
+    }
+
 }

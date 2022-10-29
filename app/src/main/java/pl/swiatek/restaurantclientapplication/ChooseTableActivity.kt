@@ -59,6 +59,9 @@ class ChooseTableActivity : AppCompatActivity() {
                         if (bookedTables.contains((i+1).toString())) {
                             arrayTableBtns[i].setBackgroundColor(Color.GRAY)
                             arrayTableBtns[i].isClickable = false
+                        }else{
+                            arrayTableBtns[i].setBackgroundColor(Color.parseColor("#3700B3"))
+                            arrayTableBtns[i].isClickable = true
                         }
                     }
                 }
