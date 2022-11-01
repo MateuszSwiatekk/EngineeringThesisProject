@@ -17,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 class MainUserPanel : AppCompatActivity() {
 
     private lateinit var welcomeEditText: TextView
+    private lateinit var email:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +31,7 @@ class MainUserPanel : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val user: User? = dataSnapshot.getValue(User::class.java)
                 val name = user!!.name
+                email = user!!.email
                 welcomeEditText.text = "Welcome $name"
             }
 
@@ -57,6 +59,7 @@ class MainUserPanel : AppCompatActivity() {
 
     fun viewReservationsClick(view: View){
         val intent=Intent(this,ViewReservationsActivity::class.java)
+        intent.putExtra("email",email)
         startActivity(intent)
     }
 
