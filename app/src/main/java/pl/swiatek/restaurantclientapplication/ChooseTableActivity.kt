@@ -39,8 +39,8 @@ class ChooseTableActivity : AppCompatActivity() {
         val arrayTableBtns= arrayOf(table1Btn,table2Btn,table3Btn,table4Btn,table5Btn,table6Btn,table7Btn,table8Btn,table9Btn,table10Btn)
 
         val data=intent.getStringArrayExtra("selectedDate")
-        data2 = (data!![0]).toString()+(data[1]).toString()+(data[2]).toString()+(data[3]).toString()+(data[4]).toString()
-        data3 = (data[0]).toString()+(data[1]).toString()+(data[2]).toString()+(data[3].toInt()+1).toString()+(data[4].toInt()).toString()
+        data2 = (data!![0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+"  "+(data[3]).toString()+":"+(data[4]).toString()
+        data3 = (data[0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+"  "+(data[3].toInt()+1).toString()+":"+(data[4].toInt()).toString()
 
         userId= FirebaseAuth.getInstance().currentUser!!.uid
         email= FirebaseAuth.getInstance().currentUser!!.email.toString()
