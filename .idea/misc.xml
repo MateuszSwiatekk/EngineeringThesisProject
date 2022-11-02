@@ -9,11 +9,15 @@
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_main_user_panel.xml" value="0.2359375" />
+        <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_menu_and_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_pizza.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_reset_password.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_salads.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_view_reservations.xml" value="0.171875" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/activity_view_tables.xml" value="0.2359375" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/booked_item.xml" value="0.264" />
+        <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/layout/food_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/msswi/AndroidStudioProjects/RestaurantClientApp/app/src/main/res/xml/network_security_config.xml" value="0.25416666666666665" />
       </map>
     </option>

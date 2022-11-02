@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantClientApplication">
         <activity
+            android:name=".DrinksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SoupsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SaladsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PizzaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuAndOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewReservationsActivity"
             android:exported="false" />
         <activity

@@ -24,6 +24,7 @@ class MainUserPanel : AppCompatActivity() {
     private lateinit var viewReservationsBtn:Button
     private lateinit var bookingBtn:Button
     private lateinit var logoutBtn:Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_user_panel)
@@ -79,6 +80,11 @@ class MainUserPanel : AppCompatActivity() {
     fun viewReservationsClick(view: View){
         val intent=Intent(this,ViewReservationsActivity::class.java)
         intent.putExtra("email",email)
+        startActivity(intent)
+    }
+
+    fun menuAndOrderClick(view: View){
+        val intent=Intent(this,MenuAndOrderActivity::class.java)
         startActivity(intent)
     }
 
