@@ -1,15 +1,17 @@
 package pl.swiatek.restaurantclientapplication
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+import java.time.format.DateTimeFormatter
 import kotlin.properties.Delegates
 
 class ChooseTableActivity : AppCompatActivity() {
@@ -20,8 +22,10 @@ class ChooseTableActivity : AppCompatActivity() {
     private lateinit var bookedTablesData:DatabaseReference
     private lateinit var bookedTables:MutableSet<String>
     private var bookedAmount by Delegates.notNull<Long>()
+    private lateinit var formatter: DateTimeFormatter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_table)
 
@@ -39,8 +43,8 @@ class ChooseTableActivity : AppCompatActivity() {
         val arrayTableBtns= arrayOf(table1Btn,table2Btn,table3Btn,table4Btn,table5Btn,table6Btn,table7Btn,table8Btn,table9Btn,table10Btn)
 
         val data=intent.getStringArrayExtra("selectedDate")
-        data2 = (data!![0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+"  "+(data[3]).toString()+":"+(data[4]).toString()
-        data3 = (data[0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+"  "+(data[3].toInt()+1).toString()+":"+(data[4].toInt()).toString()
+        data2 = (data!![0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+" "+(data[3]).toString()+":"+(data[4]).toString()
+        data3 = (data[0]).toString()+"-"+(data[1]).toString()+"-"+(data[2]).toString()+" "+(data[3].toInt()+1).toString()+":"+(data[4].toInt()).toString()
 
         userId= FirebaseAuth.getInstance().currentUser!!.uid
         email= FirebaseAuth.getInstance().currentUser!!.email.toString()
@@ -50,6 +54,7 @@ class ChooseTableActivity : AppCompatActivity() {
         val queryGetBookedTables = bookedTablesData.orderByChild("endDate").startAt(data2).endAt(data3)
         queryGetBookedTables.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                bookedTables.clear()
                 if(snapshot.hasChildren()){
                     for(snapData in snapshot.children){
                         val tableData=snapData.getValue(BookedTable::class.java)
@@ -76,8 +81,15 @@ class ChooseTableActivity : AppCompatActivity() {
         val queryAmountBooked = bookedTablesData.orderByChild("email").equalTo(email)
         queryAmountBooked.addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                bookedAmount=0
                 if(snapshot.hasChildren()){
-                    bookedAmount=snapshot.childrenCount
+                    val now =now()
+                    for(snapData in snapshot.children){
+                        val child = snapData.getValue(BookedTable::class.java)
+                        if(LocalDateTime.parse(child!!.endDate,formatter).isAfter(now)){
+                            bookedAmount += 1
+                        }
+                    }
                 }else{
                     bookedAmount=0
                 }
