@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,8 +28,8 @@ import java.util.ArrayList;
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             LayoutInflater layoutInflater = LayoutInflater.from(mContext);
             convertView=layoutInflater.inflate(mResource,parent,false);
-            TextView tableNumber = convertView.findViewById(R.id.tableTextView);
-            TextView tableSize = convertView.findViewById(R.id.tableSizeTextView);
+            TextView tableNumber = convertView.findViewById(R.id.foodName);
+            TextView tableSize = convertView.findViewById(R.id.foodPrice);
             TextView startDate = convertView.findViewById(R.id.startDateTextView);
             TextView endDate = convertView.findViewById(R.id.endDateTextView);
             tableNumber.setText(getItem(position).getTableNumber());
