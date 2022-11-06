@@ -6,13 +6,11 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ListView
-import android.widget.NumberPicker
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class PizzaActivity : AppCompatActivity() {
@@ -21,11 +19,12 @@ class PizzaActivity : AppCompatActivity() {
     private lateinit var key:String
     private lateinit var listViewPizza : ListView
     private lateinit var foodList : ArrayList<FoodItem>
+    private lateinit var totalPrice:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pizza)
         key= intent.getStringExtra("orderKey").toString()
-
+        totalPrice=findViewById(R.id.totalPrice)
         listViewPizza = findViewById(R.id.listViewPizzas)
         foodList = arrayListOf()
         pizzaListDatabase=FirebaseDatabase.getInstance().getReference("FoodItems")
@@ -48,6 +47,30 @@ class PizzaActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
             }
         })
+
+        val itemsOrdered=FirebaseDatabase.getInstance().getReference("Orders").child(key).child("Items").orderByChild("price").startAt(0.00)
+
+        itemsOrdered.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    var price=0.00
+                    for(snapshot in snapshot.children){
+                        val item=snapshot.getValue(FoodItem::class.java)
+                        price += (item!!.getPrice()*item.getQuantity())
+                    }
+                    totalPrice.setText(price.toString())
+                    FirebaseDatabase.getInstance().getReference("Orders").child(key).child("total").setValue(totalPrice.text.toString().toDouble())
+                }else{
+                    totalPrice.setText("0.01")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
         listViewPizza.setOnItemClickListener { parent, view, position, id ->
             val item=foodList[position]
 
