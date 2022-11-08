@@ -3,9 +3,9 @@ package pl.swiatek.restaurantclientapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SoupsActivity : AppCompatActivity() {
+class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_soups)
+        setContentView(R.layout.activity_checkout)
     }
 }

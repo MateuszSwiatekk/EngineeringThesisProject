@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
 
 class MenuAndOrderActivity : AppCompatActivity() {
 
@@ -21,7 +19,7 @@ class MenuAndOrderActivity : AppCompatActivity() {
         totalPriceMain=findViewById(R.id.totalPriceMain)
 
         ordersDatabase = FirebaseDatabase.getInstance().getReference("Orders")
-        val order=Order("1", "ms.swiatek@gmail.com",21.01,false)
+        val order=Order("1", "ms.swiatek@gmail.com",00.00,false)
         key=ordersDatabase.push().key!!
         ordersDatabase.child(key)
             .setValue(order)
@@ -50,28 +48,33 @@ class MenuAndOrderActivity : AppCompatActivity() {
     }
 
     fun pizzaClicked(view:View){
-        val intent= Intent(this,PizzaActivity::class.java)
-        intent.putExtra("orderKey",key)
+        val intent= Intent(this,MenuItemsListActivity::class.java)
+        intent.putExtra("orderKey",arrayOf(key,"Pizza"))
         startActivity(intent)
     }
 
     fun saladsClicked(view: View){
-        val intent= Intent(this,SaladsActivity::class.java)
-        intent.putExtra("orderKey",key)
+        val intent= Intent(this,MenuItemsListActivity::class.java)
+        intent.putExtra("orderKey",arrayOf(key,"Salad"))
         startActivity(intent)
     }
 
     fun soupsClicked(view: View){
-        val intent= Intent(this,SoupsActivity::class.java)
-        intent.putExtra("orderKey",key)
+        val intent= Intent(this,MenuItemsListActivity::class.java)
+        intent.putExtra("orderKey",arrayOf(key,"Soup"))
         startActivity(intent)
     }
 
     fun drinksClicked(view: View){
-        val intent= Intent(this,DrinksActivity::class.java)
-        intent.putExtra("orderKey",key)
+        val intent= Intent(this,MenuItemsListActivity::class.java)
+        intent.putExtra("orderKey",arrayOf(key,"Drink"))
         startActivity(intent)
     }
+
+    fun checkoutClick(view: View){
+
+    }
+
     fun buildDialog(){
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Do you really want to cancel your order?")
