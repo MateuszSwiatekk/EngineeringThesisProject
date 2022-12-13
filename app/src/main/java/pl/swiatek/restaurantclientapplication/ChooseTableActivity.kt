@@ -57,7 +57,7 @@ class ChooseTableActivity : AppCompatActivity() {
         data2 =
             (data!![0]).toString() + "-" + (data[1]).toString() + "-" + (data[2]).toString() + " " + (data[3]).toString() + ":" + (data[4]).toString()
         data3 =
-            (data[0]).toString() + "-" + (data[1]).toString() + "-" + (data[2]).toString() + " " + (data[3].toInt() + 1).toString() + ":" + (data[4].toInt()).toString()
+            (data[0]).toString() + "-" + (data[1]).toString() + "-" + (data[2]).toString() + " " + (data[3].toInt() + 1).toString() + ":" + (data[4]).toString()
 
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         email = FirebaseAuth.getInstance().currentUser!!.email.toString()
@@ -76,11 +76,11 @@ class ChooseTableActivity : AppCompatActivity() {
                     }
                     for (i in 0..9) {
                         if (bookedTables.contains((i + 1).toString())) {
-                            arrayTableBtns[i].setBackgroundColor(Color.GRAY)
+                            arrayTableBtns[i].setBackgroundColor(Color.parseColor("#9fadac"))
                             arrayTableBtns[i].isClickable = false
                         } else {
-                            arrayTableBtns[i].setBackgroundColor(Color.parseColor("#3700B3"))
-                            arrayTableBtns[i].isClickable = true
+                            //arrayTableBtns[i].setBackgroundColor(Color.parseColor("#3700B3"))
+                            //arrayTableBtns[i].isClickable = true
                         }
                     }
                 }

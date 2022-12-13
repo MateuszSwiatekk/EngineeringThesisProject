@@ -42,9 +42,9 @@ class ViewReservationsActivity : AppCompatActivity() {
                         val user = userSnapshot.getValue(BookedTable::class.java)
                         bookedTableArrayList.add(user!!)
                     }
-                    val adapter = AdapterBookedTables(applicationContext,R.layout.booked_item,bookedTableArrayList)
-                    listViewBookedList.adapter = adapter
                 }
+                val adapter = AdapterBookedTables(applicationContext,R.layout.booked_item,bookedTableArrayList)
+                listViewBookedList.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {

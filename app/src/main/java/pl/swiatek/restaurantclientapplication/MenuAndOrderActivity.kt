@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.database.*
@@ -17,7 +18,8 @@ class MenuAndOrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_and_order)
         totalPriceMain=findViewById(R.id.totalPriceMain)
-
+        val checkoutBtn=findViewById<Button>(R.id.checkoutMain)
+        checkoutBtn.visibility=View.INVISIBLE
         ordersDatabase = FirebaseDatabase.getInstance().getReference("Orders")
         val order=Order("1", "ms.swiatek@gmail.com",00.00,false)
         key=ordersDatabase.push().key!!
@@ -32,6 +34,9 @@ class MenuAndOrderActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     val order=snapshot.getValue(Order::class.java)
                     totalPriceMain.setText(order!!.getTotal().toString())
+                    if(order.getTotal()!=0.00) {
+                        checkoutBtn.visibility = View.VISIBLE
+                    }
                 }
             }
 
@@ -72,7 +77,9 @@ class MenuAndOrderActivity : AppCompatActivity() {
     }
 
     fun checkoutClick(view: View){
-
+        val intent=Intent(this,CheckoutActivity::class.java)
+        intent.putExtra("orderKey",key)
+        startActivity(intent)
     }
 
     fun buildDialog(){

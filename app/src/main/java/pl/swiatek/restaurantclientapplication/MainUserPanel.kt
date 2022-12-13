@@ -88,4 +88,9 @@ class MainUserPanel : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun viewOrdersClick(view: View){
+        val intent=Intent(this,ViewOrdersActivity::class.java)
+        startActivity(intent)
+    }
+
 }
