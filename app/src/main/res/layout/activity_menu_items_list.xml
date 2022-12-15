@@ -4,12 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CEF5FA"
     tools:context=".MenuItemsListActivity">
 
     <ListView
         android:id="@+id/listViewPizzas"
         android:layout_width="0dp"
         android:layout_height="555dp"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#CEF5FA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,22 +23,32 @@
 
     <TextView
         android:id="@+id/totalPrice"
+        android:background="@drawable/edit_text_border"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="68dp"
         android:text="TextView"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkoutFoodList"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/checkoutFoodList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="628dp"
+        android:layout_width="121dp"
+        android:layout_height="112dp"
+        android:backgroundTint="#22FF16"
+        android:drawableTop="@drawable/kart_green"
         android:onClick="checkoutClick"
         android:text="Checkout"
+        android:textColor="#000000"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.831"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.951" />
 </androidx.constraintlayout.widget.ConstraintLayout>

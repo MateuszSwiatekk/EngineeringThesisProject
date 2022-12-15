@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:layout_marginBottom="16dp"
-    app:cardBackgroundColor="#AEAEF1"
+    app:cardBackgroundColor="#FBFBFB"
     app:cardCornerRadius="20dp"
     app:cardElevation="8dp">
 
@@ -25,10 +25,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Table :"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_thin"
                 android:text="Example table"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -52,10 +52,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Table size :"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_thin"
                 android:text="Example size"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -79,10 +79,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_bold"
                 android:text="Start date :"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_thin"
                 android:text="Example start date"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
@@ -106,10 +106,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_bold"
                 android:text="End date :"
                 android:textColor="@color/black"
-                android:textSize="26sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/roboto_thin"
                 android:text="Example end date"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
