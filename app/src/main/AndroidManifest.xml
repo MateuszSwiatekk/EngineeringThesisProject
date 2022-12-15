@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantClientApplication">
         <activity
+            android:name=".OrdersDetails"
+            android:exported="false" />
+        <activity
             android:name=".ViewOrdersActivity"
             android:exported="false" />
         <activity
@@ -51,6 +54,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
